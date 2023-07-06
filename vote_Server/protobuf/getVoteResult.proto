@@ -1,0 +1,10 @@
+syntax = "proto3"; // 声明了protobuf的版本
+
+package protoMsg; // 声明了代码所在的包（对于C++来说是namespace）
+
+//获取投票结果
+message GetVoteResult
+{
+    string type = 1;
+    string voteID = 2;
+}
