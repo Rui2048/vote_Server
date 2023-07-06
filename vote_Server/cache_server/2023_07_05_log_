@@ -1,0 +1,46 @@
+2023-07-05 14:10:13.661746 [info]: cache_server init sucessfully!
+2023-07-05 14:10:13.661919 [erro]: cache_server start listen success
+2023-07-05 14:11:43.638346 [info]: cache_server init sucessfully!
+2023-07-05 14:11:43.638472 [erro]: cache_server start listen success
+2023-07-05 14:12:44.266637 [info]: cache_server init sucessfully!
+2023-07-05 14:12:44.266808 [erro]: cache_server start listen success
+2023-07-05 14:12:56.518121 [erro]: recv from master_server failed, errno is 104
+2023-07-05 14:13:20.023958 [info]: cache_server init sucessfully!
+2023-07-05 14:13:20.024105 [erro]: cache_server start listen success
+2023-07-05 14:14:07.661781 [info]: cache_server init sucessfully!
+2023-07-05 14:14:07.661934 [erro]: cache_server start listen success
+2023-07-05 14:14:32.680539 [erro]: recv from master_server failed, errno is 104
+2023-07-05 14:16:21.087576 [info]: cache_server init sucessfully!
+2023-07-05 14:16:21.087754 [erro]: cache_server start listen success
+2023-07-05 14:17:05.120330 [info]: cache_server init sucessfully!
+2023-07-05 14:17:05.120503 [erro]: cache_server start listen success
+2023-07-05 14:18:18.757207 [info]: cache_server init sucessfully!
+2023-07-05 14:18:18.757364 [erro]: cache_server start listen success
+2023-07-05 14:18:42.509844 [info]: cache_server init sucessfully!
+2023-07-05 14:18:42.510069 [erro]: cache_server start listen success
+2023-07-05 14:19:47.227639 [info]: cache_server init sucessfully!
+2023-07-05 14:19:47.227778 [erro]: cache_server start listen success
+2023-07-05 14:20:42.218511 [info]: cache_server init sucessfully!
+2023-07-05 14:20:42.218676 [erro]: cache_server start listen success
+2023-07-05 14:20:50.242848 [info]: cache_server init sucessfully!
+2023-07-05 14:20:50.243004 [erro]: cache_server start listen success
+2023-07-05 14:32:02.561665 [info]: cache_server init sucessfully!
+2023-07-05 14:32:02.561811 [erro]: cache_server start listen success
+2023-07-05 14:32:42.068799 [info]: cache_server init sucessfully!
+2023-07-05 14:32:42.068975 [erro]: cache_server start listen success
+2023-07-05 14:35:08.218817 [info]: cache_server init sucessfully!
+2023-07-05 14:35:08.218929 [erro]: listen sockfd bind failed, errno is 98
+2023-07-05 14:53:20.240235 [info]: cache_server init sucessfully!
+2023-07-05 14:53:20.240462 [erro]: listen sockfd bind failed, errno is 98
+2023-07-05 17:28:58.983768 [info]: cache_server init sucessfully!
+2023-07-05 17:28:58.986376 [erro]: cache_server start listen success
+2023-07-05 17:30:31.522494 [info]: cache_server init sucessfully!
+2023-07-05 17:30:31.523590 [erro]: cache_server start listen success
+2023-07-05 17:40:19.103818 [info]: cache_server init sucessfully!
+2023-07-05 17:40:19.103991 [erro]: cache_server start listen success
+2023-07-05 17:43:41.313418 [info]: cache_server init sucessfully!
+2023-07-05 17:43:41.313549 [erro]: cache_server start listen success
+2023-07-05 17:48:31.550371 [info]: cache_server init sucessfully!
+2023-07-05 17:48:31.550586 [erro]: cache_server start listen success
+2023-07-05 17:53:14.331034 [info]: cache_server init sucessfully!
+2023-07-05 17:53:14.331345 [erro]: cache_server start listen success
