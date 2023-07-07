@@ -5,6 +5,7 @@
 #include <fstream>
 #include "../protobuf/protbuf.h"
 
+void testCreateVote(CacheServer *server);
 
 CacheServer::CacheServer() 
 {
@@ -124,6 +125,10 @@ int CacheServer::connectToServer()
 
 int CacheServer::eventLoop()
 {
+    //testCreateVote(this);
+
+    //return 0;
+
     epoll_event evs[1024];
     char buf[1024]; //接收缓冲区
     int ev_size = sizeof(evs) / sizeof(epoll_event);
@@ -154,13 +159,15 @@ int CacheServer::eventLoop()
                 //char msg[] = "This is Server";
                 //send(cfd, msg, strlen(msg), 0);
             }
-            else if (cur_fd == cfd)
+            else
             {
+                cfd = cur_fd;
                 memset(buf, 0, sizeof(buf));
                 int len = recv(cur_fd, buf, sizeof(buf), 0);
                 if (len == 0) 
                 {
                     //LOG_INFO("server disconnected");
+                    epollDelfd(cur_fd);
                 }
                 else if (len == -1) 
                 {
@@ -168,38 +175,12 @@ int CacheServer::eventLoop()
                 }
                 else
                 {
-                    cout << "recv:" << len << endl << buf << endl;
+                    //cout << "recv:" << len << endl << buf << endl;
+                    //cout << "recv:" << strlen(buf) << endl << buf << endl;
+                    cout << "recv:" << strlen(buf) << endl;
                     string msg = buf;
                     append(msg);
-                }
-            }
-            else
-            {
-                memset(buf, 0, sizeof(buf));
-                int len = recv(cur_fd, buf, sizeof(buf), 0);
-                if (len == 0) 
-                {
-                    cout << "client disconnected" << endl;
-                }
-                else if (len == -1) 
-                {
-                    LOG_ERROR("recv from master_server failed, errno is %d", errno);
-                    
-                }
-                else
-                {
-                    cout << "recv:" << len << endl << buf << endl;
-                    string resp;
-                    resp += "HTTP/1.1 200 OK\r\n";
-                    resp += "Content-Length:12\r\n";
-                    resp += "Connection:keep-alive\r\n";
-                    resp += "Access-Control-Allow-Origin:*\r\n";
-                    resp += "\r\n";
-                    resp += "VoteServer\r\n";
-                    const char *msg = resp.c_str();
-                    int slen;
-                    slen = send(cur_fd, msg, strlen(msg), 0);
-                    //cout << "send worlds:" << slen << endl;
+                    m_queuestat.post();
                 }
             }
         }
@@ -296,7 +277,7 @@ bool CacheServer::append(string request)
 }
 
 //业务逻辑处理函数
-void CacheServer::dealWithCreateVote(string &request)//新建投票
+void CacheServer::dealWithCreateVote(string &request, bool testFlag)//新建投票
 {
     protoMsg::CreateVote protoRequest;
     protoMsg::CreateVoteResponse protoResponse;
@@ -309,6 +290,7 @@ void CacheServer::dealWithCreateVote(string &request)//新建投票
     long deadline = atol(protoRequest.deadline().c_str());
     long realTime = time(nullptr);
     long voteID = realTime;
+    LOG_INFO("[create new vote] voteName:%s", voteName.c_str());
     Vote newVote;
     newVote.setVoteName(voteName);
     newVote.setVoteID(voteID);
@@ -316,10 +298,16 @@ void CacheServer::dealWithCreateVote(string &request)//新建投票
     newVote.setStopTime(deadline);
     newVote.setNormalWeight(dazhongWeight);
     newVote.setProfessionWeight(zhuanyeWeight);
+    cout << voteName << endl;
+    cout << dazhongWeight << endl;
+    cout << zhuanyeWeight << endl;
+    cout << deadline << endl;
+    cout << "评委:" << endl;
     for (int i = 0; i < judgeChoose.size(); i++)
     {
         string name = judgeChoose[i].name();
         int id = atoi(judgeChoose[i].id().c_str());
+        cout << name << ' ' << id << endl;
         if (id == 0)
         {
             newVote.addNormalJudge(name);
@@ -331,24 +319,36 @@ void CacheServer::dealWithCreateVote(string &request)//新建投票
             professionalJudgeVotes[name].push_back(voteID);
         }
     }
+    cout << "选手:" << endl;
     for (int i = 0; i < playerChoose.size(); i++) 
     {
         newVote.addCandidate(playerChoose[i]);
+        cout << playerChoose[i] << endl;
     }
     Votes[voteID] = newVote;
     protoResponse.set_result("ok");
     string response;
     protoResponse.SerializeToString(&response);
-    send(cfd, response.c_str(), response.size(), 0);
+    if (testFlag == false) 
+    {
+        send(cfd, response.c_str(), response.size(), 0);
+    }
+    else
+    {
+        cout << response << endl;
+    }
 }
-void CacheServer::dealWithLogin(string &request)    //登录
+void CacheServer::dealWithLogin(string &request, bool testFlag)    //登录
 {
     protoMsg::LoginRequest protoRequest;
     protoMsg::LoginResponse protoResponse;
     protoRequest.ParseFromString(request);
     string uname = protoRequest.uname();
     string upwd = protoRequest.upwd();
-    protoResponse.set_uname("htsc");
+    cout << uname << endl;
+    cout << upwd << endl;
+    LOG_INFO("[user login] uname:%s, upwd:%s", uname.c_str(), upwd.c_str());
+    protoResponse.set_uname(uname);
     if (uname == "admin")   //管理员
     {
         protoResponse.set_id("2");
@@ -363,20 +363,33 @@ void CacheServer::dealWithLogin(string &request)    //登录
         {
             protoResponse.set_id("0");
         }
+        else
+        {
+            protoResponse.set_id("-1");
+        }
     }
     string response;
     protoResponse.SerializeToString(&response);
     cout << "send:" << response << endl;
     send(cfd, response.c_str(), response.size(), 0);
 }
-void CacheServer::dealWithVote(string &request)     //投票
+void CacheServer::dealWithVote(string &request, bool testFlag)     //投票
 {
     protoMsg::Vote protoRequest;
     protoMsg::VoteResponse protoResponse;
     protoRequest.ParseFromString(request);
     long voteID = atol(protoRequest.voteid().c_str());
+    if (Votes.count(voteID) == 0)
+    {
+        cout << "VoteID:" << voteID << "不存在" << endl;
+        send(cfd, "error", 6, 0);
+        return;
+    }
     string name = protoRequest.uname();
     int status = atoi(protoRequest.ustatus().c_str());
+    cout << voteID << endl;
+    cout << "评委:" << name  << ' ' << status << endl << "得分选手：" << endl;
+    LOG_INFO("[Vote] name:%s voteID:%d", name.c_str(), voteID);
     google::protobuf::RepeatedPtrField<protoMsg::Vote_Plaer_score> player_score = protoRequest.plaerpoints();
     if (status == 0)
     {
@@ -385,6 +398,7 @@ void CacheServer::dealWithVote(string &request)     //投票
             if (player_score[i].score() == "1")
             {
                 Votes[voteID].voteByNormalJudge(player_score[i].name());
+                cout << player_score[i].name() << endl;
             }
         }
     }
@@ -395,6 +409,7 @@ void CacheServer::dealWithVote(string &request)     //投票
             if (player_score[i].score() == "1")
             {
                 Votes[voteID].voteByProfessionalJudge(player_score[i].name());
+                cout << player_score[i].name() << endl;
             }
         }
     }
@@ -414,12 +429,20 @@ void CacheServer::dealWithVote(string &request)     //投票
     protoResponse.SerializeToString(&response);
     send(cfd, response.c_str(), response.size(), 0);
 }
-void CacheServer::dealWithGetVoteResult(string &request) //获取投票结果
+void CacheServer::dealWithGetVoteResult(string &request, bool testFlag) //获取投票结果
 {
     protoMsg::GetVoteResult protoRequest;
     protoMsg::VoteResponse protoResponse;
     protoRequest.ParseFromString(request);
     long voteID = atol(protoRequest.voteid().c_str());
+    cout << "VoteID:" << voteID << endl;
+    LOG_INFO("[Get vote result] voteID:%d", voteID);
+    if (Votes.count(voteID) == 0)
+    {
+        cout << "VoteID:" << voteID << "不存在" << endl;
+        send(cfd, "error", 6, 0);
+        return;
+    }
     CNode *head = Votes[voteID].getCandidateList().head;
     CNode *tail = Votes[voteID].getCandidateList().tail;
     CNode *cur = head;
@@ -437,11 +460,12 @@ void CacheServer::dealWithGetVoteResult(string &request) //获取投票结果
     send(cfd, response.c_str(), response.size(), 0);
 
 }
-void CacheServer::dealWithGetAllVotes(string &request)  //管理员获取所有投票
+void CacheServer::dealWithGetAllVotes(string &request, bool testFlag)  //管理员获取所有投票
 {
     protoMsg::GetAllVotes protoRequest;
     protoRequest.ParseFromString(request);
     protoMsg::GetAllVotesResponse protoResponse;
+    LOG_INFO("[Get all votes]");
     for (auto iter : Votes)
     {
         protoMsg::GetAllVotesResponse_Vote *temp = protoResponse.add_votes();
@@ -461,14 +485,22 @@ void CacheServer::dealWithGetAllVotes(string &request)  //管理员获取所有�
     protoResponse.SerializeToString(&response);
     send(cfd, response.c_str(), response.size(), 0);
 }
-void CacheServer::dealWithGetVotesByOneJudge(string &request) //评委获取自己的投票
+void CacheServer::dealWithGetVotesByOneJudge(string &request, bool testFlag) //评委获取自己的投票
 {
     protoMsg::GetVoteResultByOneJudge protoRequest;
     protoRequest.ParseFromString(request);
     protoMsg::GetVoteResultByOneJudgeResponse protoResponse;
     string name = protoRequest.uname();
     string status = protoRequest.ustatus();
+    cout << "评委：" << name << ' ' << status << endl;
+    LOG_INFO("[Get votes by one judge] name:%s", name.c_str());
     vector<long> voteIDs;
+    if (normalJudgeVotes.count(name) == 0 && professionalJudgeVotes.count(name) == 0)
+    {
+        cout << "评委:" << name << "不存在" << endl;
+        send(cfd, "error", 6, 0);
+        return;
+    }
     if (status == "0")
     {
         voteIDs = normalJudgeVotes[name];
@@ -495,4 +527,36 @@ void CacheServer::dealWithGetVotesByOneJudge(string &request) //评委获取自�
     string response;
     protoResponse.SerializeToString(&response);
     send(cfd, response.c_str(), response.size(), 0);
+}
+
+void testCreateVote(CacheServer *server)
+{
+    protoMsg::CreateVote req;
+    req.set_type("创建投票");
+    req.set_votename("vote1");
+    req.set_zhuanyeweight("0.1");
+    req.set_dazhongweight("0.2");
+    req.set_deadline("0000");
+    protoMsg::CreateVote_Judge* judge = req.add_judgechoose();
+    judge->set_name("大众评委1");
+    judge->set_id("0");
+    judge = req.add_judgechoose();
+    judge->set_name("专业评委1");
+    judge->set_id("1");
+    string *player = req.add_playerchoose();
+    *player = "选手1";
+    
+    //string s;
+    //req.SerializeToString(&s);
+    //server->dealWithCreateVote(s, true);
+    //delete judge;
+    //delete player;
+}
+void testLogin(CacheServer *server)
+{
+
+}
+void testVote()
+{
+
 }

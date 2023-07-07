@@ -73,13 +73,14 @@ class CacheServer
     void run(); 
     bool append(string request); //往工作队列中添加任务
 
+    public:
     //业务逻辑处理函数
-    void dealWithCreateVote(string &request);
-    void dealWithLogin(string &request);
-    void dealWithVote(string &request);
-    void dealWithGetVoteResult(string &request);
-    void dealWithGetAllVotes(string &request);
-    void dealWithGetVotesByOneJudge(string &request);
+    void dealWithCreateVote(string &request, bool testFlag = false);
+    void dealWithLogin(string &request, bool testFlag = false);
+    void dealWithVote(string &request, bool testFlag = false);
+    void dealWithGetVoteResult(string &request, bool testFlag = false);
+    void dealWithGetAllVotes(string &request, bool testFlag = false);
+    void dealWithGetVotesByOneJudge(string &request, bool testFlag = false);
 
     //投票任务
     unordered_map<long, Vote> Votes;

@@ -10,8 +10,18 @@ DLinkList::DLinkList()
 
 DLinkList::~DLinkList()
 {
+    CNode *cur = head;
+    while (head != tail)
+    {
+        head = head->next;
+        cur->next = nullptr;
+        head->pre = nullptr;
+        delete cur;
+        cur = head;
+    }
+    head->next = nullptr;
+    head->pre = nullptr;
     delete head;
-    delete tail;
 }
 
 void DLinkList::update(CNode *node)
@@ -36,7 +46,7 @@ void DLinkList::addNode(CNode *node)
     node->pre = head;
 }
 
-string DLinkList::getTop3()
+/*string DLinkList::getTop3()
 {
     string res;
     CNode *cur = head->next;
@@ -50,7 +60,7 @@ string DLinkList::getTop3()
         res += ',';
     }
     return res;
-}
+}*/
 
 Vote::Vote()
 {
@@ -72,7 +82,7 @@ void Vote::setVoteID(long id)
 {
     m_voteID = id;
 }
-void Vote::setVoteName(string votename)
+void Vote::setVoteName(std::string votename)
 {
     m_voteName = votename;
 }
@@ -92,33 +102,33 @@ void Vote::setProfessionWeight(float professionWeight)
 {
     m_professionalWeight = professionWeight;
 }
-int Vote::addCandidate(string name)
+int Vote::addCandidate(std::string name)
 {
     m_candidateNum++;
     candidates[name] = new CNode(name);
     candidateList.addNode(candidates[name]);
     return m_candidateNum;
 }
-int Vote::addNormalJudge(string name)
+int Vote::addNormalJudge(std::string name)
 {
     m_normalJudgeNum++;
     normalJudges[name] = 0;
     return m_normalJudgeNum;
 }
-int Vote::addProfessionalJudge(string name)
+int Vote::addProfessionalJudge(std::string name)
 {
     m_professionalJudgeNum++;
     professionalJudges[name] = 0;
     return m_professionalJudgeNum;
 }
-float Vote::voteByNormalJudge(string name)
+float Vote::voteByNormalJudge(std::string name)
 {
     candidates[name]->score += m_normalWeight;
     candidateList.update(candidates[name]);
     normalJudges[name] = 1;
     return candidates[name]->score;
 }
-float Vote::voteByProfessionalJudge(string name)
+float Vote::voteByProfessionalJudge(std::string name)
 {
     candidates[name]->score += m_professionalWeight;
     candidateList.update(candidates[name]);
