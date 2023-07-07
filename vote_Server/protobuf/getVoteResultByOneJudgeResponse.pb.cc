@@ -80,6 +80,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::protoMsg::GetVoteResultByOneJudgeResponse_Vote, votename_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::protoMsg::GetVoteResultByOneJudgeResponse_Vote, voteid_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::protoMsg::GetVoteResultByOneJudgeResponse_Vote, isvalid_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::protoMsg::GetVoteResultByOneJudgeResponse_Vote, isvoted_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::protoMsg::GetVoteResultByOneJudgeResponse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -89,7 +90,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::protoMsg::GetVoteResultByOneJudgeResponse_Vote)},
-  { 8, -1, sizeof(::protoMsg::GetVoteResultByOneJudgeResponse)},
+  { 9, -1, sizeof(::protoMsg::GetVoteResultByOneJudgeResponse)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -119,14 +120,14 @@ void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n%getVoteResultByOneJudgeResponse.proto\022"
-      "\010protoMsg\"\233\001\n\037GetVoteResultByOneJudgeRes"
+      "\010protoMsg\"\254\001\n\037GetVoteResultByOneJudgeRes"
       "ponse\022=\n\005votes\030\001 \003(\0132..protoMsg.GetVoteR"
-      "esultByOneJudgeResponse.Vote\0329\n\004Vote\022\020\n\010"
+      "esultByOneJudgeResponse.Vote\032J\n\004Vote\022\020\n\010"
       "voteName\030\001 \001(\t\022\016\n\006voteID\030\002 \001(\t\022\017\n\007isVali"
-      "d\030\003 \001(\tb\006proto3"
+      "d\030\003 \001(\t\022\017\n\007isVoted\030\004 \001(\tb\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 215);
+      descriptor, 232);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "getVoteResultByOneJudgeResponse.proto", &protobuf_RegisterTypes);
 }
@@ -152,6 +153,7 @@ void GetVoteResultByOneJudgeResponse_Vote::InitAsDefaultInstance() {
 const int GetVoteResultByOneJudgeResponse_Vote::kVoteNameFieldNumber;
 const int GetVoteResultByOneJudgeResponse_Vote::kVoteIDFieldNumber;
 const int GetVoteResultByOneJudgeResponse_Vote::kIsValidFieldNumber;
+const int GetVoteResultByOneJudgeResponse_Vote::kIsVotedFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 GetVoteResultByOneJudgeResponse_Vote::GetVoteResultByOneJudgeResponse_Vote()
@@ -177,6 +179,10 @@ GetVoteResultByOneJudgeResponse_Vote::GetVoteResultByOneJudgeResponse_Vote(const
   if (from.isvalid().size() > 0) {
     isvalid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.isvalid_);
   }
+  isvoted_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.isvoted().size() > 0) {
+    isvoted_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.isvoted_);
+  }
   // @@protoc_insertion_point(copy_constructor:protoMsg.GetVoteResultByOneJudgeResponse.Vote)
 }
 
@@ -184,6 +190,7 @@ void GetVoteResultByOneJudgeResponse_Vote::SharedCtor() {
   votename_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   voteid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   isvalid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  isvoted_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 GetVoteResultByOneJudgeResponse_Vote::~GetVoteResultByOneJudgeResponse_Vote() {
@@ -195,6 +202,7 @@ void GetVoteResultByOneJudgeResponse_Vote::SharedDtor() {
   votename_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   voteid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   isvalid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  isvoted_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void GetVoteResultByOneJudgeResponse_Vote::SetCachedSize(int size) const {
@@ -220,6 +228,7 @@ void GetVoteResultByOneJudgeResponse_Vote::Clear() {
   votename_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   voteid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   isvalid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  isvoted_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   _internal_metadata_.Clear();
 }
 
@@ -275,6 +284,22 @@ bool GetVoteResultByOneJudgeResponse_Vote::MergePartialFromCodedStream(
             this->isvalid().data(), static_cast<int>(this->isvalid().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
             "protoMsg.GetVoteResultByOneJudgeResponse.Vote.isValid"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string isVoted = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_isvoted()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->isvoted().data(), static_cast<int>(this->isvoted().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "protoMsg.GetVoteResultByOneJudgeResponse.Vote.isVoted"));
         } else {
           goto handle_unusual;
         }
@@ -337,6 +362,16 @@ void GetVoteResultByOneJudgeResponse_Vote::SerializeWithCachedSizes(
       3, this->isvalid(), output);
   }
 
+  // string isVoted = 4;
+  if (this->isvoted().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->isvoted().data(), static_cast<int>(this->isvoted().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "protoMsg.GetVoteResultByOneJudgeResponse.Vote.isVoted");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      4, this->isvoted(), output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -384,6 +419,17 @@ void GetVoteResultByOneJudgeResponse_Vote::SerializeWithCachedSizes(
         3, this->isvalid(), target);
   }
 
+  // string isVoted = 4;
+  if (this->isvoted().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->isvoted().data(), static_cast<int>(this->isvoted().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "protoMsg.GetVoteResultByOneJudgeResponse.Vote.isVoted");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->isvoted(), target);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -420,6 +466,13 @@ size_t GetVoteResultByOneJudgeResponse_Vote::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->isvalid());
+  }
+
+  // string isVoted = 4;
+  if (this->isvoted().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->isvoted());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -461,6 +514,10 @@ void GetVoteResultByOneJudgeResponse_Vote::MergeFrom(const GetVoteResultByOneJud
 
     isvalid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.isvalid_);
   }
+  if (from.isvoted().size() > 0) {
+
+    isvoted_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.isvoted_);
+  }
 }
 
 void GetVoteResultByOneJudgeResponse_Vote::CopyFrom(const ::google::protobuf::Message& from) {
@@ -492,6 +549,8 @@ void GetVoteResultByOneJudgeResponse_Vote::InternalSwap(GetVoteResultByOneJudgeR
   voteid_.Swap(&other->voteid_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   isvalid_.Swap(&other->isvalid_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  isvoted_.Swap(&other->isvoted_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }

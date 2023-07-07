@@ -15,8 +15,9 @@ public:
     CNode() : pre(nullptr), next(nullptr){}
     CNode(std::string _name) : name(_name), score(0.0), pre(nullptr), next(nullptr){}
     ~CNode(){
-        delete pre;
-        delete next;
+        //std::cout << "析构CNode" << std::endl;
+        //delete pre;
+        //delete next;
     }
 };
 
@@ -55,6 +56,8 @@ public:
     float voteByProfessionalJudge(std::string name);
 
     DLinkList getCandidateList() {return candidateList;}
+    bool isVoted(std::string name);
+    void setVoted(std::string name);
 
 private:
     long m_voteID;

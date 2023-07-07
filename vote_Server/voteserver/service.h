@@ -17,14 +17,14 @@
 #include "../config.h"
 #include "../vote/vote.h"
 
-class CacheServer;
+class VoteServer;
 
 //cache_server类
-class CacheServer
+class VoteServer
 {
     public:
-    CacheServer();
-    ~CacheServer();
+    VoteServer();
+    ~VoteServer();
     //初始化cache_server
     int init();
     void setPort(int port) {cache_server_port = port;}  //设置监听端口

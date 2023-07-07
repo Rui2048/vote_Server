@@ -192,6 +192,20 @@ class GetVoteResultByOneJudgeResponse_Vote : public ::google::protobuf::Message 
   ::std::string* release_isvalid();
   void set_allocated_isvalid(::std::string* isvalid);
 
+  // string isVoted = 4;
+  void clear_isvoted();
+  static const int kIsVotedFieldNumber = 4;
+  const ::std::string& isvoted() const;
+  void set_isvoted(const ::std::string& value);
+  #if LANG_CXX11
+  void set_isvoted(::std::string&& value);
+  #endif
+  void set_isvoted(const char* value);
+  void set_isvoted(const char* value, size_t size);
+  ::std::string* mutable_isvoted();
+  ::std::string* release_isvoted();
+  void set_allocated_isvoted(::std::string* isvoted);
+
   // @@protoc_insertion_point(class_scope:protoMsg.GetVoteResultByOneJudgeResponse.Vote)
  private:
 
@@ -199,6 +213,7 @@ class GetVoteResultByOneJudgeResponse_Vote : public ::google::protobuf::Message 
   ::google::protobuf::internal::ArenaStringPtr votename_;
   ::google::protobuf::internal::ArenaStringPtr voteid_;
   ::google::protobuf::internal::ArenaStringPtr isvalid_;
+  ::google::protobuf::internal::ArenaStringPtr isvoted_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_getVoteResultByOneJudgeResponse_2eproto::TableStruct;
 };
@@ -481,6 +496,59 @@ inline void GetVoteResultByOneJudgeResponse_Vote::set_allocated_isvalid(::std::s
   }
   isvalid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), isvalid);
   // @@protoc_insertion_point(field_set_allocated:protoMsg.GetVoteResultByOneJudgeResponse.Vote.isValid)
+}
+
+// string isVoted = 4;
+inline void GetVoteResultByOneJudgeResponse_Vote::clear_isvoted() {
+  isvoted_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& GetVoteResultByOneJudgeResponse_Vote::isvoted() const {
+  // @@protoc_insertion_point(field_get:protoMsg.GetVoteResultByOneJudgeResponse.Vote.isVoted)
+  return isvoted_.GetNoArena();
+}
+inline void GetVoteResultByOneJudgeResponse_Vote::set_isvoted(const ::std::string& value) {
+  
+  isvoted_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:protoMsg.GetVoteResultByOneJudgeResponse.Vote.isVoted)
+}
+#if LANG_CXX11
+inline void GetVoteResultByOneJudgeResponse_Vote::set_isvoted(::std::string&& value) {
+  
+  isvoted_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:protoMsg.GetVoteResultByOneJudgeResponse.Vote.isVoted)
+}
+#endif
+inline void GetVoteResultByOneJudgeResponse_Vote::set_isvoted(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  isvoted_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:protoMsg.GetVoteResultByOneJudgeResponse.Vote.isVoted)
+}
+inline void GetVoteResultByOneJudgeResponse_Vote::set_isvoted(const char* value, size_t size) {
+  
+  isvoted_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:protoMsg.GetVoteResultByOneJudgeResponse.Vote.isVoted)
+}
+inline ::std::string* GetVoteResultByOneJudgeResponse_Vote::mutable_isvoted() {
+  
+  // @@protoc_insertion_point(field_mutable:protoMsg.GetVoteResultByOneJudgeResponse.Vote.isVoted)
+  return isvoted_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* GetVoteResultByOneJudgeResponse_Vote::release_isvoted() {
+  // @@protoc_insertion_point(field_release:protoMsg.GetVoteResultByOneJudgeResponse.Vote.isVoted)
+  
+  return isvoted_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void GetVoteResultByOneJudgeResponse_Vote::set_allocated_isvoted(::std::string* isvoted) {
+  if (isvoted != NULL) {
+    
+  } else {
+    
+  }
+  isvoted_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), isvoted);
+  // @@protoc_insertion_point(field_set_allocated:protoMsg.GetVoteResultByOneJudgeResponse.Vote.isVoted)
 }
 
 // -------------------------------------------------------------------

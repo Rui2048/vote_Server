@@ -10,7 +10,7 @@ DLinkList::DLinkList()
 
 DLinkList::~DLinkList()
 {
-    CNode *cur = head;
+    /*CNode *cur = head;
     while (head != tail)
     {
         head = head->next;
@@ -21,7 +21,7 @@ DLinkList::~DLinkList()
     }
     head->next = nullptr;
     head->pre = nullptr;
-    delete head;
+    delete head;*/
 }
 
 void DLinkList::update(CNode *node)
@@ -134,4 +134,28 @@ float Vote::voteByProfessionalJudge(std::string name)
     candidateList.update(candidates[name]);
     professionalJudges[name] = 1;
     return candidates[name]->score;
+}
+
+bool Vote::isVoted(std::string name)
+{
+    if (normalJudges[name] == 1 | professionalJudges[name] == 1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void Vote::setVoted(std::string name)
+{
+    if (normalJudges.count(name) != 0)
+    {
+        normalJudges[name] = 1;
+    }
+    else if (professionalJudges.count(name) != 0)
+    {
+        professionalJudges[name] = 1;
+    }
 }
