@@ -1,2 +1,0 @@
-/usr/bin/ar qc ../lib/libmylib2.a CMakeFiles/mylib2.dir/voteServer_proto.pb.cc.o
-/usr/bin/ranlib ../lib/libmylib2.a
