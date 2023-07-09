@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/server.dir/main.cpp.o -o bin/server   -L/home/ray/c++/vote_Server/vote_Server/build/lib  -Wl,-rpath,/home/ray/c++/vote_Server/vote_Server/build/lib lib/libsrclib.a -lprotolib -lprotobuf 

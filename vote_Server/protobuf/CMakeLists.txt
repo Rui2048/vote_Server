@@ -1,0 +1,5 @@
+aux_source_directory(./ SRC_LISTS)
+#set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
+set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/../build/lib)
+add_library(protolib ${SRC_LISTS})
+#message(STATUS "静态库mylib2创建成功")

@@ -1,0 +1,2 @@
+/usr/bin/ar qc /home/ray/c++/vote_Server/vote_Server/build/lib/libprotolib.a CMakeFiles/protolib.dir/voteServer_proto.pb.o
+/usr/bin/ranlib /home/ray/c++/vote_Server/vote_Server/build/lib/libprotolib.a

@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../lib/libmylib1.a CMakeFiles/mylib1.dir/config.cpp.o CMakeFiles/mylib1.dir/log.cpp.o CMakeFiles/mylib1.dir/service.cpp.o CMakeFiles/mylib1.dir/vote.cpp.o
+/usr/bin/ranlib ../lib/libmylib1.a

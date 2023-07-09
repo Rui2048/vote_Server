@@ -1,0 +1,113 @@
+syntax = "proto3"; // 声明了protobuf的版本
+
+package protoMsg; // 声明了代码所在的包（对于C++来说是namespace）
+
+// 创建投票
+message CreateVote
+{
+    string type = 1;
+    string voteName = 2;    // 1表示第一个字段
+    string dazhongWeight = 3;
+    string zhuanyeWeight = 4;
+    message Judge
+    {
+        string name = 1;
+        string ID = 2;
+    }
+    repeated Judge judgeChoose = 5;
+    repeated string playerChoose = 6;
+    string deadline = 7;
+}
+
+// 创建投票响应
+message CreateVoteResponse
+{
+    string result = 1;
+}
+
+//获取所有投票
+message GetAllVotes
+{
+    string type = 1;
+}
+
+//获取所有投票响应
+message GetAllVotesResponse
+{
+    message Vote
+    {
+        string voteName = 1;
+        string voteID = 2;
+        string isValid = 3;
+    }
+    repeated Vote votes = 1;
+}
+
+//获取投票结果
+message GetVoteResult
+{
+    string type = 1;
+    string voteID = 2;
+}
+
+//评委获取自己的投票
+message GetVoteResultByOneJudge
+{
+    string type = 1;
+    string uname = 2;
+    string ustatus = 3;
+}
+
+//评委获取自己的投票响应
+message GetVoteResultByOneJudgeResponse
+{
+    message Vote
+    {
+        string voteName = 1;
+        string voteID = 2;
+        string isValid = 3;
+        string isVoted = 4;
+    }
+    repeated Vote votes = 1;
+}
+
+// 登录请求
+message LoginRequest
+{
+    string type = 1;
+    string uname = 2;    // 1表示第一个字段
+    string upwd = 3;
+}
+
+//请求登录的响应
+message LoginResponse
+{
+    string uname = 1;
+    string id = 2;
+}
+
+//投票请求
+message Vote
+{
+    string type = 1;
+    string uname = 2;    // 1表示第一个字段
+    string ustatus = 3;
+    message Plaer_score
+    {
+        string name = 1;
+        string score = 2;
+    }
+    repeated Plaer_score plaerPoints = 4;
+    string voteID = 5;
+}
+
+//投票响应
+message VoteResponse
+{
+    message Plaerscore
+    {
+        string name = 1;
+        string score = 2;
+    }
+    repeated Plaerscore playerScores = 1;
+}

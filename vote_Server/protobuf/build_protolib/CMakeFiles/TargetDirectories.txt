@@ -1,0 +1,3 @@
+/home/ray/c++/vote_Server/vote_Server/protobuf/build_protolib/CMakeFiles/protolib.dir
+/home/ray/c++/vote_Server/vote_Server/protobuf/build_protolib/CMakeFiles/edit_cache.dir
+/home/ray/c++/vote_Server/vote_Server/protobuf/build_protolib/CMakeFiles/rebuild_cache.dir

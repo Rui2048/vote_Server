@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../lib/libsrclib.a CMakeFiles/srclib.dir/config.cpp.o CMakeFiles/srclib.dir/log.cpp.o CMakeFiles/srclib.dir/service.cpp.o CMakeFiles/srclib.dir/vote.cpp.o
+/usr/bin/ranlib ../lib/libsrclib.a

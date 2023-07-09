@@ -1,4 +1,4 @@
-#include "./voteserver/service.h"
+#include "service.h"
 #include <assert.h>
 
 int main(int argc, char *argv[])

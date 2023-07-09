@@ -1,0 +1,6 @@
+/home/ray/c++/vote_Server/vote_Server/build/CMakeFiles/server.dir
+/home/ray/c++/vote_Server/vote_Server/build/CMakeFiles/edit_cache.dir
+/home/ray/c++/vote_Server/vote_Server/build/CMakeFiles/rebuild_cache.dir
+/home/ray/c++/vote_Server/vote_Server/build/src/CMakeFiles/srclib.dir
+/home/ray/c++/vote_Server/vote_Server/build/src/CMakeFiles/edit_cache.dir
+/home/ray/c++/vote_Server/vote_Server/build/src/CMakeFiles/rebuild_cache.dir
